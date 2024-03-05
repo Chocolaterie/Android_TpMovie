@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.TpMovie" parent="android:Theme.Material.Light.NoActionBar">
+
+        <item name="android:textColor">@color/movie_primary_white</item>
+        <item name="android:textColorPrimary">@color/movie_primary_white</item>
+        <item name="android:colorForeground">@color/movie_primary_white</item>
+        <item name="android:textColorHint">#88FFFFFF</item>
+
+        <item name="android:textViewStyle">@font/lato</item>
+        <item name="android:fontFamily">@font/lato</item>
+
+        <item name="android:buttonStyle">@style/primaryButton</item>
+    </style>
+
+
+</resources>

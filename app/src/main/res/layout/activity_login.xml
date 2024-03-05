@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mobile_background"
+    >
+
+    <!-- 1er bloc ligne (header) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="10dp"
+                android:tint="#fef1e1"
+                android:src="@drawable/login_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/movie_primary_white_88"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                android:text="Please be aware when you enter credentials in the login page"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- 2eme bloc ligne (formulaire) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/email_icon"
+        android:hint="Email"
+        android:inputType="textWebEmailAddress"
+        style="@style/edtFormIcon"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/password"
+        android:paddingBottom="15dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        style="@style/edtFormIcon"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="Connexion"
+        />
+
+    </LinearLayout>
+
+    <!-- 3eme bloc ligne (footer) -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Don't have account ? Register now !"
+        style="@style/footerText"
+        />
+
+</LinearLayout>

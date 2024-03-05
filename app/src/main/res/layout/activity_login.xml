@@ -65,6 +65,18 @@
         style="@style/edtFormIcon"
         />
 
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/movie_primary_white_88"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="italic"
+            android:padding="10dp"
+            android:onClick="onClickForgetPassword"
+            android:text="@string/i_forget_password"/>
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -75,11 +87,27 @@
     </LinearLayout>
 
     <!-- 3eme bloc ligne (footer) -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't have account ? Register now !"
-        style="@style/footerText"
-        />
+        android:paddingBottom="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Don't have account ?"
+            style="@style/footerText"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/register_now"
+            android:onClick="onClickRegisterNow"
+            style="@style/footerText"
+            />
+    </LinearLayout>
+
 
 </LinearLayout>

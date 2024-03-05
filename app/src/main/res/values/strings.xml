@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TpMovie</string>
+
+    <string name="register_now"><u>Register now !</u></string>
+
+    <string name="i_forget_password"><u>Coucou ! J\'ai oublié mon mot de passe ! Haha !</u></string>
+
 </resources>

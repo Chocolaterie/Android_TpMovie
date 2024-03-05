@@ -23,6 +23,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:label="Sign In"></activity>
+        <activity
+            android:name=".ForgettenPasswordActivity"
+            android:label="Récupération de mot de passe"></activity>
+
     </application>
 
 </manifest>

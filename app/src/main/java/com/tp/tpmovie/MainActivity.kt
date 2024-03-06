@@ -1,19 +1,11 @@
 package com.tp.tpmovie
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.tp.tpmovie.ui.theme.TpMovieTheme
 import kotlin.reflect.KClass
 
 class MainActivity : ComponentActivity() {
@@ -23,6 +15,16 @@ class MainActivity : ComponentActivity() {
         setContentView(R.layout.activity_login);
     }
 
+    fun onSubmit(view: View){
+        // Preparer une dialog box
+        var builder = AlertDialog.Builder(this);
+        builder.setTitle("Connexion");
+        builder.setMessage("Vous êtes connecté(e) avec succès");
+        builder.setPositiveButton("Ok") { dialog, which ->
+            dialog.dismiss();
+        };
+        builder.show();
+    }
     fun openActivity(classType : KClass<*>) {
         var intent = Intent(this, classType.java);
         startActivity(intent);

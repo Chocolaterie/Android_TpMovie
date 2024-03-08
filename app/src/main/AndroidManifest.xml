@@ -33,10 +33,16 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:label="Sign In"></activity>
+            android:label="Sign In" />
         <activity
             android:name=".ForgettenPasswordActivity"
-            android:label="Récupération de mot de passe"></activity>
+            android:label="Récupération de mot de passe" />
+        <activity
+            android:name=".MovieDetailActivity"
+            android:label="Détail du film" />
+        <activity
+            android:name=".MovieFormActivity"
+            android:label="Formulaire du film" />
 
     </application>
 

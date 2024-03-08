@@ -5,6 +5,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tp.tpmovie.model.Movie
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -30,7 +31,7 @@ interface MovieService {
     suspend fun getMovie(id : Int) : Movie
 
     @POST("movies")
-    suspend fun getMovie(data: Movie) : Movie
+    suspend fun saveMovie(@Body data: Movie) : Movie
 
     object MovieApi {
         val retrofitService : MovieService by lazy { retrofit.create(MovieService::class.java) }

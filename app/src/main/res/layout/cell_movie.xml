@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
         <variable
@@ -18,7 +19,7 @@
         <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="180dp"
             >
 
             <pl.droidsonroids.gif.GifImageView
@@ -67,6 +68,37 @@
                     android:layout_height="wrap_content"
                     android:text="@{movie.synopsis}"
                     />
+
+                <!--3 boutons-->
+                <LinearLayout
+                    android:layout_gravity="end"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="fill_vertical"
+                    >
+                    <ImageButton
+                        android:id="@+id/btnViewMovie"
+                        android:layout_gravity="bottom"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:tint="#FFF"
+                        android:src="@drawable/view_icon"
+                        tools:ignore="UseAppTint" />
+
+                    <ImageButton
+                        android:id="@+id/btnEditMovie"
+                        android:layout_gravity="bottom"
+                        android:layout_width="46dp"
+                        android:layout_height="46dp"
+                        android:backgroundTint="#00FFFFFF"
+                        android:tint="#FFF"
+                        android:src="@drawable/view_icon"
+                        tools:ignore="UseAppTint" />
+
+                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>

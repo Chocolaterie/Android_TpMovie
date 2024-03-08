@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.tp.tpmovie.databinding.CellMovieBinding
 import com.tp.tpmovie.model.Movie
 
@@ -14,8 +15,9 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDi
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val person = getItem(position)
-        holder.bind(person);
+        val movie = getItem(position)
+
+        holder.bind(movie);
     }
 
     /**
@@ -29,6 +31,10 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDi
          */
         fun bind(data : Movie) {
             binding.movie = data;
+
+            // Experiemntal : charger url sur la cellule
+            Picasso.get().load(data.thumbnail_url).into(binding.ivMovieCover);
+
             binding.executePendingBindings();
         }
 

@@ -1,6 +1,6 @@
 package com.tp.tpmovie.model
 
-class Movie (var id : Int = -1, var title: String = "", var synopsis: String = "", var duration : String = "", var year : String = "") {
+class Movie (var id : Int = -1, var title: String = "", var synopsis: String = "", var duration : String = "", var year : String = "", var thumbnail_url : String = "") {
 
     override fun equals(other: Any?): Boolean {
         if (other is Movie){

@@ -15,17 +15,24 @@
         android:elevation="@dimen/cardview_default_elevation"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="140dp"
-            android:background="@drawable/movie_cover"
             >
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/ivMovieCover"
+                android:src="@drawable/movie_cover_loading"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#44000000"
+                android:background="#88000000"
                 android:orientation="vertical"
                 android:padding="10dp"
                 >
@@ -61,6 +68,6 @@
                     android:text="@{movie.synopsis}"
                     />
             </LinearLayout>
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 </layout>

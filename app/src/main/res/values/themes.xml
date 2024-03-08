@@ -12,6 +12,9 @@
         <item name="android:fontFamily">@font/lato</item>
 
         <item name="android:buttonStyle">@style/primaryButton</item>
+
+        <!--  Surcharge-->
+        <item name="android:colorBackgroundFloating">#444444</item>
     </style>
 
 

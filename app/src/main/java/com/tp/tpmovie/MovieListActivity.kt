@@ -1,6 +1,7 @@
 package com.tp.tpmovie
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,29 +9,49 @@ import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import com.example.demoeni.MovieListAdapter
 import com.tp.tpmovie.databinding.ActivityMovieListBinding
 import com.tp.tpmovie.model.Movie
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
 class MovieListActivity : ComponentActivity() {
 
     lateinit var vm : ActivityMovieListBinding;
 
-    lateinit var movies : MutableLiveData<MutableList<Movie>>;
+    lateinit var movies : List<Movie>;
+
+    lateinit var adapter : MovieListAdapter;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         vm = DataBindingUtil.setContentView(this, R.layout.activity_movie_list);
 
-        var adapter = MovieListAdapter();
+        adapter = MovieListAdapter();
 
         vm.rvMovies.adapter = adapter;
 
-        // faux films
-        var movies = MutableLiveData<MutableList<Movie>>(mutableListOf(Movie(1, "Sharknado", "Best film", "1h36", "1994"), Movie(2, "Teletubies", "Soleil qui parle","23h36", "1999")));
+        // Afficher une loading modal avant d'appeler le service
+        val progressDialog = ProgressDialog(this);
+        progressDialog.setTitle("Chargement");
+        progressDialog.setMessage("Récupérer des films...");
+        progressDialog.show();
 
-        adapter.submitList(movies.value);
+        // Lancer par défaut le service pour récupérer les films
+        lifecycleScope.launch {
+            delay(1000);
+
+            // Appeler le service
+            movies = MovieService.MovieApi.retrofitService.getMovies()
+
+            // Envoyer le recyler view
+            adapter.submitList(movies);
+
+            // Fermer le loading modal
+            progressDialog.dismiss();
+        }
     }
 }

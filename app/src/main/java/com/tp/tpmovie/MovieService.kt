@@ -29,6 +29,12 @@ interface MovieService {
     @POST("login")
     suspend fun login(@Body person: Person) : ResponseMetier<String>
 
+    @POST("signup")
+    suspend fun signup(@Body person: Person) : ResponseMetier<Person>
+
+    @POST("reset-password")
+    suspend fun resetPassword(@Body person: Person) : ResponseMetier<Boolean>
+
     @GET("movies")
     suspend fun getMovies() : List<Movie>
 

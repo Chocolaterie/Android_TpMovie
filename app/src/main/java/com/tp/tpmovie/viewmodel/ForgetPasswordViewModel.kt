@@ -1,4 +1,6 @@
 package com.tp.tpmovie.viewmodel
 
-class ForgetPasswordViewModel(var email: String = "") {
+import com.tp.tpmovie.model.Person
+
+class ForgetPasswordViewModel(var person: Person = Person()) {
 }

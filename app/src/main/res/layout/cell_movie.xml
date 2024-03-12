@@ -6,6 +6,10 @@
         <variable
             name="movie"
             type="com.tp.tpmovie.model.Movie" />
+
+        <variable
+            name="authContext"
+            type="com.tp.tpmovie.model.AuthContextViewModel" />
     </data>
 
     <LinearLayout
@@ -95,7 +99,8 @@
                         android:layout_height="46dp"
                         android:backgroundTint="#00FFFFFF"
                         android:tint="#FFF"
-                        android:src="@drawable/view_icon"
+                        android:visibility="@{authContext.isLoggedVisibility()}"
+                        android:src="@drawable/edit_icon"
                         tools:ignore="UseAppTint" />
 
                 </LinearLayout>

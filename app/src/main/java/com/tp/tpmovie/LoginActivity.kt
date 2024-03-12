@@ -1,7 +1,6 @@
 package com.tp.tpmovie
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,14 +8,13 @@ import androidx.activity.ComponentActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.tp.tpmovie.databinding.ActivityLoginBinding
-import com.tp.tpmovie.databinding.ActivityMovieListBinding
 import com.tp.tpmovie.model.Person
 import com.tp.tpmovie.utils.AuthRegistry
 import com.tp.tpmovie.utils.Helpers
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
-class MainActivity : ComponentActivity() {
+class LoginActivity : ComponentActivity() {
 
     lateinit var vm : ActivityLoginBinding;
 
@@ -25,7 +23,7 @@ class MainActivity : ComponentActivity() {
 
         vm = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-        vm.person = Person();
+        vm.person = Person("Viviane","vivane@gmail.com", "123456");
     }
 
     fun onSubmit(view: View){
@@ -46,17 +44,21 @@ class MainActivity : ComponentActivity() {
                 AuthRegistry.getAuthInstance()?.setValidToken(response.data!!);
 
                 // Afficher message
-                var builder = AlertDialog.Builder(this@MainActivity);
+                var builder = AlertDialog.Builder(this@LoginActivity);
                 builder.setTitle("Connexion");
                 builder.setMessage("Vous êtes connecté(e) avec succès");
                 builder.setPositiveButton("Ok") { dialog, which ->
                     dialog.dismiss();
                 };
                 builder.show();
+
+                // Ouvrir la page films
+                val intent = Intent(this@LoginActivity, MovieListActivity::class.java)
+                startActivity(intent);
             }
             else {
                 // Afficher message
-                var builder = AlertDialog.Builder(baseContext);
+                var builder = AlertDialog.Builder(this@LoginActivity);
                 builder.setTitle("Connexion");
                 builder.setMessage("Couple email/mot de passe invalide");
                 builder.setPositiveButton("Ok") { dialog, which ->

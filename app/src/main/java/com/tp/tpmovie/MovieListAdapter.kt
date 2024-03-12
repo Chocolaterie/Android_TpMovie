@@ -9,6 +9,7 @@ import com.squareup.picasso.Picasso
 import com.tp.tpmovie.MovieDetailActivity
 import com.tp.tpmovie.MovieFormActivity
 import com.tp.tpmovie.databinding.CellMovieBinding
+import com.tp.tpmovie.model.AuthContextViewModel
 import com.tp.tpmovie.model.Movie
 
 class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDiffCallback()) {
@@ -34,6 +35,8 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDi
          */
         fun bind(data : Movie) {
             binding.movie = data;
+            // instancier le authcontext
+            binding.authContext = AuthContextViewModel()
 
             // Ecouter le click du bouton view dans la cellule
             binding.btnViewMovie.setOnClickListener {

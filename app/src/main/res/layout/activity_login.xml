@@ -1,114 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/mobile_background"
-    >
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- 1er bloc ligne (header) -->
+    <data>
+        <variable
+            name="person"
+            type="com.tp.tpmovie.model.Person" />
+    </data>
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:gravity="center_vertical">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/mobile_background"
+        >
 
+        <!-- 1er bloc ligne (header) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_margin="10dp"
+                    android:tint="#fef1e1"
+                    android:src="@drawable/login_icon"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/movie_primary_white_88"
+                    android:textSize="15sp"
+                    android:textStyle="italic"
+                    android:text="Please be aware when you enter credentials in the login page"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 2eme bloc ligne (formulaire) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:tint="#fef1e1"
-                android:src="@drawable/login_icon"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/email_icon"
+            android:hint="Email"
+            android:inputType="textWebEmailAddress"
+            android:text="@={person.email}"
+            style="@style/edtFormIcon"
+            />
 
-            <TextView
-                android:layout_width="wrap_content"
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/password"
+            android:paddingBottom="15dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:text="@={person.password}"
+            style="@style/edtFormIcon"
+            />
+
+        <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:textColor="@color/movie_primary_white_88"
-                android:textSize="15sp"
+                android:textAlignment="center"
+                android:textSize="18sp"
                 android:textStyle="italic"
-                android:text="Please be aware when you enter credentials in the login page"/>
+                android:padding="10dp"
+                android:onClick="onClickForgetPassword"
+                android:text="@string/i_forget_password"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Connexion"
+            android:onClick="onSubmit"
+            />
+
         </LinearLayout>
-    </LinearLayout>
 
-    <!-- 2eme bloc ligne (formulaire) -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/email_icon"
-        android:hint="Email"
-        android:inputType="textWebEmailAddress"
-        style="@style/edtFormIcon"
-        />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/password"
-        android:paddingBottom="15dp"
-        android:hint="Password"
-        android:inputType="textPassword"
-        style="@style/edtFormIcon"
-        />
-
-    <TextView
+        <!-- 3eme bloc ligne (footer) -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/movie_primary_white_88"
-            android:textAlignment="center"
-            android:textSize="18sp"
-            android:textStyle="italic"
-            android:padding="10dp"
-            android:onClick="onClickForgetPassword"
-            android:text="@string/i_forget_password"/>
+            android:paddingBottom="20dp"
+            android:orientation="vertical">
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="Connexion"
-        android:onClick="onSubmit"
-        />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Don't have account ?"
+                style="@style/footerText"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/register_now"
+                android:onClick="onClickRegisterNow"
+                style="@style/footerText"
+                />
+        </LinearLayout>
+
 
     </LinearLayout>
-
-    <!-- 3eme bloc ligne (footer) -->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Don't have account ?"
-            style="@style/footerText"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/register_now"
-            android:onClick="onClickRegisterNow"
-            style="@style/footerText"
-            />
-    </LinearLayout>
-
-
-</LinearLayout>
+</layout>

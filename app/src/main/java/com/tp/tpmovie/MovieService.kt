@@ -3,6 +3,8 @@ package com.tp.tpmovie
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.tp.tpmovie.model.Movie
+import com.tp.tpmovie.model.Person
+import com.tp.tpmovie.model.ResponseMetier
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
@@ -23,6 +25,9 @@ interface MovieService {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(BASE_URL).build();
     }
+
+    @POST("login")
+    suspend fun login(@Body person: Person) : ResponseMetier<String>
 
     @GET("movies")
     suspend fun getMovies() : List<Movie>

@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.demoeni.MovieListAdapter
 import com.tp.tpmovie.databinding.ActivityMovieListBinding
 import com.tp.tpmovie.model.Movie
+import com.tp.tpmovie.utils.Helpers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
@@ -35,10 +36,7 @@ class MovieListActivity : ComponentActivity() {
         vm.rvMovies.adapter = adapter;
 
         // Afficher une loading modal avant d'appeler le service
-        val progressDialog = ProgressDialog(this);
-        progressDialog.setTitle("Chargement");
-        progressDialog.setMessage("Récupérer des films...");
-        progressDialog.show();
+        Helpers.showProgressDialog(this, "Récupérer des films...");
 
         // Lancer par défaut le service pour récupérer les films
         lifecycleScope.launch {
@@ -51,7 +49,7 @@ class MovieListActivity : ComponentActivity() {
             adapter.submitList(movies);
 
             // Fermer le loading modal
-            progressDialog.dismiss();
+            Helpers.closeProgressDialog();
         }
     }
 }

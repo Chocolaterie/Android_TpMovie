@@ -17,11 +17,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.squareup.picasso.Picasso
-import com.tp.tpmovie.databinding.ActivityMovieDetailBinding
 import com.tp.tpmovie.databinding.ActivityMovieFormBinding
-import com.tp.tpmovie.databinding.ActivityRegisterBinding
 import com.tp.tpmovie.model.Movie
 import com.tp.tpmovie.ui.theme.TpMovieTheme
+import com.tp.tpmovie.viewmodel.MovieFormViewModel
 import com.tp.tpmovie.viewmodel.RegisterViewModel
 import kotlinx.coroutines.launch
 
@@ -32,39 +31,20 @@ class MovieFormActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm = DataBindingUtil.setContentView(this, R.layout.activity_movie_form);
-
-        // Récupérer le film envoyé depuis l'intent
+        // Récupérer le film envoyer depuis l'intent
         val movie = intent.getParcelableExtra<Movie>("movie");
 
-        vm.movie = movie;
+        // Databind view model
+        vm = DataBindingUtil.setContentView(this, R.layout.activity_movie_form);
+        val movieFormViewModel = MovieFormViewModel(this, movie!!);
+        vm.viewModel = movieFormViewModel;
 
         // Charger l'image
         Picasso.get().load(movie?.thumbnail_url).into(vm.ivMovieDetailCover);
 
+        // Liéer le onclick
         vm.btnSubmit.setOnClickListener {
-
-            // Afficher une loading modal avant d'appeler le service
-            val progressDialog = ProgressDialog(this);
-            progressDialog.setTitle("Chargement");
-            progressDialog.setMessage("Sauvegarde du film..");
-            progressDialog.show();
-
-            lifecycleScope.launch {
-
-                val movieUpdated = MovieService.MovieApi.retrofitService.saveMovie(vm.movie!!);
-
-                // Fermer le progress
-                progressDialog.dismiss();
-
-                // Ouvrir une page avec le film de la cellule
-                val intent = Intent(vm.root.context, MovieDetailActivity::class.java);
-
-                intent.putExtra("movie", movieUpdated);
-
-                startActivity(intent)
-            }
-
+            movieFormViewModel.SaveMovie();
         }
     }
 }

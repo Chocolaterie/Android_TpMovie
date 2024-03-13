@@ -1,5 +1,6 @@
 package com.tp.tpmovie.utils
 
+import android.app.AlertDialog
 import android.app.ProgressDialog
 import android.content.Context
 
@@ -27,6 +28,19 @@ class Helpers {
          */
         fun closeProgressDialog(){
             progressDialog?.dismiss();
+        }
+
+
+        fun showAlert(context: Context, message: String ){
+            // Afficher message
+            var builder = AlertDialog.Builder(context);
+            builder.setTitle("Information");
+            builder.setMessage(message);
+            builder.setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss();
+            };
+
+            builder.show();
         }
     }
 }

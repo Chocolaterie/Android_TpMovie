@@ -3,10 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="movie"
-            type="com.tp.tpmovie.model.Movie" />
+            name="viewModel"
+            type="com.tp.tpmovie.viewmodel.MovieFormViewModel" />
     </data>
 
     <LinearLayout
@@ -59,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:hint="Titre"
-                android:text="@={movie.title}" />
+                android:text="@={viewModel.movie.title}" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -67,21 +66,21 @@
                 android:layout_margin="5dp"
                 android:hint="Durée"
                 android:inputType="textWebEmailAddress"
-                android:text="@={movie.duration}" />
+                android:text="@={viewModel.movie.duration}" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:hint="Année"
-                android:text="@={movie.year}" />
+                android:text="@={viewModel.movie.year}" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:hint="Synopsis"
-                android:text="@={movie.synopsis}" />
+                android:text="@={viewModel.movie.synopsis}" />
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -13,11 +13,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import com.squareup.picasso.Picasso
 import com.tp.tpmovie.databinding.ActivityMovieDetailBinding
-import com.tp.tpmovie.databinding.ActivityRegisterBinding
 import com.tp.tpmovie.model.Movie
 import com.tp.tpmovie.ui.theme.TpMovieTheme
+import com.tp.tpmovie.viewmodel.MovieDetailViewModel
 import com.tp.tpmovie.viewmodel.RegisterViewModel
 
 class MovieDetailActivity : ComponentActivity() {
@@ -27,14 +28,23 @@ class MovieDetailActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        vm = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail);
-
         // récupérer le film envoyé depuis l'intent
         val movie = intent.getParcelableExtra<Movie>("movie");
 
-        vm.movie = movie;
+        // Databinding view model
+        vm = DataBindingUtil.setContentView(this, R.layout.activity_movie_detail);
+        val movieDetailViewModel = MovieDetailViewModel(this, movie!!.id);
+        vm.viewModel = movieDetailViewModel;
 
         // Charger l'image
         Picasso.get().load(movie?.thumbnail_url).into(vm.ivMovieDetailCover);
+
+        // Quand changement -> rafraichir le view model
+        movieDetailViewModel.movie.observe(this, Observer {
+            vm.viewModel = vm.viewModel;
+        });
+
+        // Appeler l'api
+        movieDetailViewModel.callApi();
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
 import com.tp.tpmovie.databinding.ActivityRegisterBinding
+import com.tp.tpmovie.model.Person
 import com.tp.tpmovie.ui.theme.TpMovieTheme
 import com.tp.tpmovie.utils.AuthRegistry
 import com.tp.tpmovie.utils.Helpers
@@ -31,50 +32,14 @@ class RegisterActivity : ComponentActivity() {
 
         vm = DataBindingUtil.setContentView(this, R.layout.activity_register);
 
-        val registry = RegisterViewModel();
-        vm.viewModel = registry;
+        val registerViewModel = RegisterViewModel(this, Person("isaac", "isaac@gmail.com", "123456"));
+        vm.viewModel = registerViewModel;
 
-        // POUR LE TEST (LE FLEMME)
-        registry.fakeData();
-    }
-
-    fun onSubmit(view: View){
-        // Afficher une boite de chargement
-        Helpers.showProgressDialog(this, "Tentative d'inscription...");
-
-        lifecycleScope.launch {
-
-            // Récupérer la réponse métier de l'api
-            val response = MovieService.MovieApi.retrofitService.signup(vm.viewModel?.person!!);
-
-            // Toujours fermer la boite de chargement
-            Helpers.closeProgressDialog();
-
-            // Si connexion avec succès
-            if (response.code == "200"){
-                // Afficher message
-                var builder = AlertDialog.Builder(this@RegisterActivity);
-                builder.setTitle("Inscription");
-                builder.setMessage("Vous êtes inscrit(e) avec succès");
-                builder.setPositiveButton("Ok") { dialog, which ->
-                    dialog.dismiss();
-                };
-                builder.show();
-
-                // Ouvrir la page login
-                val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                startActivity(intent);
-            }
-            else {
-                // Afficher message
-                var builder = AlertDialog.Builder(this@RegisterActivity);
-                builder.setTitle("Inscription");
-                builder.setMessage("Erreur de l'inscription");
-                builder.setPositiveButton("Ok") { dialog, which ->
-                    dialog.dismiss();
-                };
-                builder.show();
-            }
+        // Associer le clique
+        vm.btnSubmit.setOnClickListener {
+            registerViewModel.onSubmit();
         }
     }
+
+
 }

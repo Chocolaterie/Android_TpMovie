@@ -11,6 +11,7 @@ import com.tp.tpmovie.databinding.ActivityLoginBinding
 import com.tp.tpmovie.model.Person
 import com.tp.tpmovie.utils.AuthRegistry
 import com.tp.tpmovie.utils.Helpers
+import com.tp.tpmovie.viewmodel.LoginViewModel
 import kotlinx.coroutines.launch
 import kotlin.reflect.KClass
 
@@ -23,68 +24,22 @@ class LoginActivity : ComponentActivity() {
 
         vm = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-        vm.person = Person("Viviane","vivane@gmail.com", "123456");
-    }
+        var loginViewModel = LoginViewModel(this, Person("Viviane","viviane@gmail.com", "123456"));
+        vm.viewModel = loginViewModel;
 
-    fun onSubmit(view: View){
-        // Afficher une boite de chargement
-        Helpers.showProgressDialog(this, "Tentative de connexion...");
-
-        lifecycleScope.launch {
-
-            // Récupérer la réponse métier de l'api
-            val response = MovieService.MovieApi.retrofitService.login(vm.person!!);
-
-            // Toujours fermer la boite de chargement
-            Helpers.closeProgressDialog();
-
-            // Si connexion avec succès
-            if (response.code == "200"){
-                // Garde le token
-                AuthRegistry.getAuthInstance()?.setValidToken(response.data!!);
-
-                // Afficher message
-                var builder = AlertDialog.Builder(this@LoginActivity);
-                builder.setTitle("Connexion");
-                builder.setMessage("Vous êtes connecté(e) avec succès");
-                builder.setPositiveButton("Ok") { dialog, which ->
-                    dialog.dismiss();
-                };
-                builder.show();
-
-                // Ouvrir la page films
-                val intent = Intent(this@LoginActivity, MovieListActivity::class.java)
-                startActivity(intent);
-            }
-            else {
-                // Afficher message
-                var builder = AlertDialog.Builder(this@LoginActivity);
-                builder.setTitle("Connexion");
-                builder.setMessage("Couple email/mot de passe invalide");
-                builder.setPositiveButton("Ok") { dialog, which ->
-                    dialog.dismiss();
-                };
-                builder.show();
-            }
+        // Lien avec les cliques
+        vm.btnSubmit.setOnClickListener {
+            loginViewModel.callLoginApi();
         }
+
+        vm.tvForgetPassword.setOnClickListener {
+            loginViewModel.onClickForgetPassword();
+        }
+
+        vm.tvRegisterNow.setOnClickListener {
+            loginViewModel.onClickRegisterNow();
+        }
+
     }
 
-    fun openActivity(classType : KClass<*>) {
-        var intent = Intent(this, classType.java);
-        startActivity(intent);
-    }
-
-    /**
-     * Ouvrir page RegisterActivity lors d'un clique
-     */
-    fun onClickRegisterNow(view : View){
-        openActivity(RegisterActivity::class);
-    }
-
-    /**
-     * Ouvrir page RegisterActivity lors d'un clique
-     */
-    fun onClickForgetPassword(view : View){
-        openActivity(ForgettenPasswordActivity::class);
-    }
 }

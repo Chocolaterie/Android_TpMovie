@@ -10,6 +10,7 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface MovieService {
 
@@ -39,7 +40,7 @@ interface MovieService {
     suspend fun getMovies() : List<Movie>
 
     @GET("movies/{id}")
-    suspend fun getMovie(id : Int) : Movie
+    suspend fun getMovie(@Path("id") id : Int) : ResponseMetier<Movie>
 
     @POST("movies")
     suspend fun saveMovie(@Body data: Movie) : Movie

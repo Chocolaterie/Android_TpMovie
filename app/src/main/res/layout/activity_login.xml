@@ -3,8 +3,8 @@
 
     <data>
         <variable
-            name="person"
-            type="com.tp.tpmovie.model.Person" />
+            name="viewModel"
+            type="com.tp.tpmovie.viewmodel.LoginViewModel" />
     </data>
 
     <LinearLayout
@@ -60,7 +60,7 @@
             android:drawableLeft="@drawable/email_icon"
             android:hint="Email"
             android:inputType="textWebEmailAddress"
-            android:text="@={person.email}"
+            android:text="@={viewModel.person.email}"
             style="@style/edtFormIcon"
             />
 
@@ -71,11 +71,12 @@
             android:paddingBottom="15dp"
             android:hint="Password"
             android:inputType="textPassword"
-            android:text="@={person.password}"
+            android:text="@={viewModel.person.password}"
             style="@style/edtFormIcon"
             />
 
         <TextView
+                android:id="@+id/tvForgetPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -84,15 +85,14 @@
                 android:textSize="18sp"
                 android:textStyle="italic"
                 android:padding="10dp"
-                android:onClick="onClickForgetPassword"
                 android:text="@string/i_forget_password"/>
 
         <Button
+            android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Connexion"
-            android:onClick="onSubmit"
             />
 
         </LinearLayout>
@@ -112,10 +112,10 @@
                 />
 
             <TextView
+                android:id="@+id/tvRegisterNow"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_now"
-                android:onClick="onClickRegisterNow"
                 style="@style/footerText"
                 />
         </LinearLayout>

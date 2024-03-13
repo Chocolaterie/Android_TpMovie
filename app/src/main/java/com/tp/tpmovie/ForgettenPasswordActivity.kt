@@ -29,42 +29,13 @@ class ForgettenPasswordActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         vm = DataBindingUtil.setContentView(this, R.layout.activity_forgot_password);
-        vm.viewModel = ForgetPasswordViewModel();
-    }
+        val forgetPasswordViewModel = ForgetPasswordViewModel(this);
+        vm.viewModel = forgetPasswordViewModel;
 
-    fun onSubmit(view: View){
-        // Afficher une boite de chargement
-        Helpers.showProgressDialog(this, "Envoie du mail");
-
-        lifecycleScope.launch {
-
-            // Récupérer la réponse métier de l'api
-            val response = MovieService.MovieApi.retrofitService.resetPassword(vm.viewModel?.person!!);
-
-            // Toujours fermer la boite de chargement
-            Helpers.closeProgressDialog();
-
-            // Si connexion avec succès
-            if (response.code == "200" || response.code == "201"){
-                // Afficher message
-                var builder = AlertDialog.Builder(this@ForgettenPasswordActivity);
-                builder.setTitle("Récuperation de mot passe");
-                builder.setMessage("Un mail vous a été envoyé");
-                builder.setPositiveButton("Ok") { dialog, which ->
-                    dialog.dismiss();
-                };
-                builder.show();
-            }
-            else {
-                // Afficher message
-                var builder = AlertDialog.Builder(this@ForgettenPasswordActivity);
-                builder.setTitle("Récuperation de mot passe");
-                builder.setMessage("Serveur inaccessible");
-                builder.setPositiveButton("Ok") { dialog, which ->
-                    dialog.dismiss();
-                };
-                builder.show();
-            }
+        vm.btnSubmit.setOnClickListener {
+            forgetPasswordViewModel.onSubmit();
         }
     }
+
+
 }

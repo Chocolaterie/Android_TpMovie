@@ -1,9 +1,19 @@
 package com.tp.tpmovie.utils
 
-class AuthRegistry(var token : String) {
+import androidx.lifecycle.MutableLiveData
+
+class AuthRegistry(var token : String, var bLogged : MutableLiveData<Boolean> = MutableLiveData(false)) {
 
     fun setValidToken(_token : String){
         token = _token;
+        // notifié connecté
+        bLogged.value = true;
+    }
+
+    fun logout(){
+        token = "";
+        // notifié décconnecté
+        bLogged.value = false;
     }
 
     fun tokenExist() : Boolean {

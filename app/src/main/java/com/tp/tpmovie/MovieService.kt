@@ -37,13 +37,13 @@ interface MovieService {
     suspend fun resetPassword(@Body person: Person) : ResponseMetier<Boolean>
 
     @GET("movies")
-    suspend fun getMovies() : List<Movie>
+    suspend fun getMovies() : ResponseMetier<List<Movie>>
 
     @GET("movies/{id}")
     suspend fun getMovie(@Path("id") id : Int) : ResponseMetier<Movie>
 
     @POST("movies")
-    suspend fun saveMovie(@Body data: Movie) : Movie
+    suspend fun saveMovie(@Body data: Movie) : ResponseMetier<Movie>
 
     object MovieApi {
         val retrofitService : MovieService by lazy { retrofit.create(MovieService::class.java) }

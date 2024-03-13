@@ -9,7 +9,7 @@
 
         <variable
             name="authContext"
-            type="com.tp.tpmovie.model.AuthContextViewModel" />
+            type="com.tp.tpmovie.viewmodel.AuthContextViewModel" />
     </data>
 
     <LinearLayout
@@ -99,7 +99,7 @@
                         android:layout_height="46dp"
                         android:backgroundTint="#00FFFFFF"
                         android:tint="#FFF"
-                        android:visibility="@{authContext.isLoggedVisibility()}"
+                        android:visibility="@{authContext.isLoggedVisibility(false)}"
                         android:src="@drawable/edit_icon"
                         tools:ignore="UseAppTint" />
 

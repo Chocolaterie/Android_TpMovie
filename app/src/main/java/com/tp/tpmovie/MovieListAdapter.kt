@@ -9,7 +9,7 @@ import com.squareup.picasso.Picasso
 import com.tp.tpmovie.MovieDetailActivity
 import com.tp.tpmovie.MovieFormActivity
 import com.tp.tpmovie.databinding.CellMovieBinding
-import com.tp.tpmovie.model.AuthContextViewModel
+import com.tp.tpmovie.viewmodel.AuthContextViewModel
 import com.tp.tpmovie.model.Movie
 
 class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDiffCallback()) {

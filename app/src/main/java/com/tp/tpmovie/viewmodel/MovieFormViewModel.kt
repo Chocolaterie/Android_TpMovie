@@ -23,7 +23,7 @@ class MovieFormViewModel(val context : Context, var movie : Movie = Movie()) : V
 
         viewModelScope.launch {
 
-            val movieUpdated = MovieService.MovieApi.retrofitService.saveMovie(movie);
+            val movieUpdated = MovieService.MovieApi.retrofitService.saveMovie(movie).data!!;
 
             // Fermer le progress
             progressDialog.dismiss();

@@ -23,7 +23,7 @@ class MovieListViewModel(val context : Context, var movies : MutableLiveData<Lis
             delay(1000);
 
             // Notifier les changements
-            movies.value = MovieService.MovieApi.retrofitService.getMovies();
+            movies.value = MovieService.MovieApi.retrofitService.getMovies().data!!;
 
             // Fermer le loading modal
             Helpers.closeProgressDialog();

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="authContext"
+            type="com.tp.tpmovie.viewmodel.AuthContextViewModel" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/mobile_background"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accueil"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:padding="20dp"/>
+
+        <Button
+            android:id="@+id/btnLogging"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:visibility="@{authContext.isLoggedVisibility(true)}"
+            android:text="Se Connecter"
+            />
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:visibility="@{authContext.isLoggedVisibility(false)}"
+            android:text="Se déconnecter"
+            />
+
+        <Button
+            android:id="@+id/btnShowMovies"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="Voir les films"
+            />
+
+        <Button
+            android:id="@+id/btnCreateMovie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:visibility="@{authContext.isLoggedVisibility(false)}"
+            android:text="Créer un Film"
+            />
+
+        <Button
+            android:id="@+id/btnEditUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:visibility="@{authContext.isLoggedVisibility(false)}"
+            android:text="Modifier mon profil"
+            />
+
+    </LinearLayout>
+</layout>

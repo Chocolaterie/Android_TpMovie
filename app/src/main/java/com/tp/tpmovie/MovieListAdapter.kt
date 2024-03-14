@@ -64,6 +64,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDi
             // Experiemntal : charger url sur la cellule
             Picasso.get().load(data.thumbnail_url).into(binding.ivMovieCover);
 
+            // Ecouter etat de connexion
             authContextViewModel.getAuthRegistry()?.bLogged?.observe(myParent?.context as LifecycleOwner, Observer {
                 binding.authContext =  binding.authContext;
             })

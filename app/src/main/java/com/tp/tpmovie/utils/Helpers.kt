@@ -31,7 +31,20 @@ class Helpers {
         }
 
 
-        fun showAlert(context: Context, message: String ){
+        fun showAlert(context: Context, message: String, onOk : () -> Unit){
+            // Afficher message
+            var builder = AlertDialog.Builder(context);
+            builder.setTitle("Information");
+            builder.setMessage(message);
+            builder.setPositiveButton("Ok") { dialog, _ ->
+                dialog.dismiss();
+                onOk();
+            };
+
+            builder.show();
+        }
+
+        fun showAlert(context: Context, message: String){
             // Afficher message
             var builder = AlertDialog.Builder(context);
             builder.setTitle("Information");

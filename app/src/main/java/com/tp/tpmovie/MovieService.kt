@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -44,6 +45,9 @@ interface MovieService {
 
     @POST("movies")
     suspend fun saveMovie(@Body data: Movie) : ResponseMetier<Movie>
+
+    @GET("verify-token")
+    suspend fun verifyToken(@Header("authorization") token :String) : ResponseMetier<Boolean>
 
     object MovieApi {
         val retrofitService : MovieService by lazy { retrofit.create(MovieService::class.java) }

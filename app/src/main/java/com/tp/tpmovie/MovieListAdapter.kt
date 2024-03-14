@@ -3,6 +3,8 @@ package com.example.demoeni
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -28,7 +30,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDi
      * Classe interne (inception)
      * Permet de determiner comment on charge/connecter/liée les données avec la cellule
      */
-    class ViewHolder(val binding : CellMovieBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(val myParent : ViewGroup, val binding : CellMovieBinding) : RecyclerView.ViewHolder(binding.root) {
 
         /**
          * Faire le lien avec une donnée envoyé et la vue
@@ -36,7 +38,8 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDi
         fun bind(data : Movie) {
             binding.movie = data;
             // instancier le authcontext
-            binding.authContext = AuthContextViewModel()
+            val authContextViewModel = AuthContextViewModel()
+            binding.authContext = authContextViewModel;
 
             // Ecouter le click du bouton view dans la cellule
             binding.btnViewMovie.setOnClickListener {
@@ -61,6 +64,10 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDi
             // Experiemntal : charger url sur la cellule
             Picasso.get().load(data.thumbnail_url).into(binding.ivMovieCover);
 
+            authContextViewModel.getAuthRegistry()?.bLogged?.observe(myParent?.context as LifecycleOwner, Observer {
+                binding.authContext =  binding.authContext;
+            })
+
             binding.executePendingBindings();
         }
 
@@ -69,7 +76,7 @@ class MovieListAdapter : ListAdapter<Movie, MovieListAdapter.ViewHolder>(MovieDi
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = CellMovieBinding.inflate(layoutInflater, parent, false);
 
-                return ViewHolder(binding);
+                return ViewHolder(parent, binding);
             }
         }
     }

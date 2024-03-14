@@ -35,11 +35,13 @@ class LoginViewModel(var context: Context, var person: Person) : ViewModel() {
                 AuthRegistry.getAuthInstance()?.setValidToken(response.data!!);
 
                 // Afficher message
-                Helpers.showAlert(context, ("Vous êtes connecté(e) avec succès"));
+                Helpers.showAlert(context, ("Vous êtes connecté(e) avec succès"), {
+                    // Ouvrir la page films
+                    val intent = Intent(context, MovieListActivity::class.java)
+                    context.startActivity(intent);
+                });
 
-                // Ouvrir la page films
-                val intent = Intent(context, MovieListActivity::class.java)
-                context.startActivity(intent);
+
             }
             else {
                 // Afficher message
